@@ -1,15 +1,30 @@
 import sparta.SampleUsers;
 import sparta.User;
 import sparta.enumtype.DiscountEvent;
+import sparta.enumtype.OrderStatus;
 import sparta.service.Coupon;
+import sparta.service.Order;
 import sparta.service.Product;
 
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        lambdaTest();
-        enumTest();
+        enumLambdaTest();
+//        lambdaTest();
+//        enumTest();
+    }
+
+    private static void enumLambdaTest() {
+        Order order = new Order("아이폰135 Super Ultra Pro Max", OrderStatus.PRODUCT_ORDER);
+        System.out.println(order.isChangable(OrderStatus.ORDER_RECEIVED)); // true
+        System.out.println(order.isChangable(OrderStatus.DELIVERY_COMPLETE)); // false
+
+        order = new Order("아이폰135 Super Ultra Pro Max", OrderStatus.DELIVERY_COMPLETE);
+        System.out.println(order.isChangable(OrderStatus.EXCHANGE_REQUESTED));
+        System.out.println(order.isChangable(OrderStatus.PURCHASE_DECIDED));
+        System.out.println(order.isChangable(OrderStatus.PRODUCT_SHIPPED));
+
     }
 
     private static void enumTest() {
